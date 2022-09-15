@@ -31,15 +31,14 @@ describe "Customer API endpoint" do
     expect(parsed_json[:frequency]).to eq(5)
   end
 
-  xit "cancels a customers tea subscription" do
+  it "cancels a customers tea subscription" do
     customer1 = create(:customer)
     subscription1 = create(:subscription, customer_id: customer1.id, status: "active")
     subscription_params = ({
             status: "cancelled"
           })
     headers = {"CONTENT_TYPE" => "application/json"}
-
-    patch "/api/v1/customers/#{customer1.id}/subscriptions", headers: headers, params: JSON.generate(subscription_params)
+    patch "/api/v1/customers/#{customer1.id}/subscriptions/#{subscription1.id}", headers: headers, params: JSON.generate(subscription_params)
 
     expect(response).to be_successful
 
@@ -52,7 +51,7 @@ describe "Customer API endpoint" do
     expect(parsed_json).to have_key(:title)
     expect(parsed_json[:title]).to eq(subscription1.title)
     expect(parsed_json).to have_key(:status)
-    expect(parsed_json[:status]).to eq(subscription1.status)
+    expect(parsed_json[:status]).to eq("cancelled")
     expect(parsed_json).to have_key(:frequency)
     expect(parsed_json[:frequency]).to eq(subscription1.frequency)
   end
