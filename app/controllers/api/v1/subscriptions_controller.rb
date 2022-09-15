@@ -5,6 +5,12 @@ class Api::V1::SubscriptionsController < ApplicationController
     render json: subscription, status: :created
   end
 
+  def update
+    subscription = Subscription.find(params[:id])
+    subscription.update(subscription_params)
+    render json: subscription, status: :ok
+  end
+
   private
 
   def subscription_params
