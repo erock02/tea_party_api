@@ -19,6 +19,7 @@
 
 <a name="schema"></a>
 ## 3. Schema
+<img width="767" alt="Screen Shot 2022-09-15 at 7 56 48 AM" src="https://user-images.githubusercontent.com/95315216/190437450-3d71f992-49b5-4639-9d75-98756d88c466.png">
 
 
 <a name="setup"></a>
