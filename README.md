@@ -51,7 +51,8 @@
 *GET* /api/v1/customers/:customer_id/subscriptions
 <br>
 
-<img width="575" alt="Screen Shot 2022-09-14 at 11 46 13 PM" src="https://user-images.githubusercontent.com/95315216/190333684-da81e0b3-1ba4-4099-89d9-af17e151fa33.png">
+<img width="719" alt="Screen Shot 2022-09-14 at 11 51 25 PM" src="https://user-images.githubusercontent.com/95315216/190334872-3cdaef09-2851-4536-96bc-2e513be054c1.png">
+
 <br>
 
 <a name="technologies"></a>
