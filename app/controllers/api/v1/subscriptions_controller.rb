@@ -6,8 +6,9 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def create
-    subscription = Subscription.create(subscription_params)
-    render json: subscription, status: :created
+    @customer = Customer.find(params[:customer_id])
+    @customer.subscriptions.create(subscription_params)
+    render json: @customer.to_json(include: :subscriptions), status: :created
   end
 
   def update
