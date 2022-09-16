@@ -115,7 +115,9 @@ describe "Customer API endpoint" do
 
       post "/api/v1/customers/50/subscriptions", headers: headers, params: JSON.generate(subscription_params)
 
-      expect(response.body).to eq("Could not find customer with customer ID provided")
+      parsed_json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_json).to eq("Couldn't find Customer with 'id'=50")
     end
 
     it "cannot subscribe customer with missing subscription parameters" do
@@ -145,14 +147,32 @@ describe "Customer API endpoint" do
 
       patch "/api/v1/customers/#{customer1.id}/subscriptions/5", headers: headers, params: JSON.generate(subscription_params)
 
-      expect(response.body).to eq("Could not find subscription with subscription ID provided")
+      parsed_json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_json).to include("Couldn't find Subscription with 'id'=5")
+    end
+
+    it "cannot cancel subscription for customer that does not exist" do
+      subscription1 = create(:subscription)
+      subscription_params = ({
+              status: "active"
+            })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v1/customers/100/subscriptions/#{subscription1.id}", headers: headers, params: JSON.generate(subscription_params)
+
+      parsed_json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_json).to eq("Couldn't find Customer with 'id'=100")
     end
 
     it "cannot show subscriptions for customer that does not exist" do
 
       get "/api/v1/customers/1/subscriptions"
 
-      expect(response.body).to eq("Could not find customer with customer ID provided")
+      parsed_json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_json).to eq("Couldn't find Customer with 'id'=1")
     end
   end
 end
