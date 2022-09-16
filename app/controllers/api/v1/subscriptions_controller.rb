@@ -30,7 +30,7 @@ class Api::V1::SubscriptionsController < ApplicationController
       subscription.update(subscription_params)
       render json: subscription, status: :ok
     rescue ArgumentError => e
-      render json: e
+      render json: e, status: 400
     rescue ActiveRecord::RecordNotFound => e
       render json: e, status: 404
     end
